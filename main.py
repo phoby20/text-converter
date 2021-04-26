@@ -52,7 +52,7 @@ def ChangeText(dir, filename):
     name, ext = os.path.splitext(filename)
     if ext == '.dwt':
         readWrite(file_path, outputFile, 'utf-8')
-    elif ext == '.html':
+    elif ext == '.html' or ext == '.js' or ext == '.py' or ext == '.txt' or ext == '.xml' or ext == '.scss':
         try:
             with open(file_path, mode='r', encoding='utf-8') as f:
                 fl = f.read()
@@ -84,6 +84,7 @@ def ChangeText(dir, filename):
     else:
         try:
             readWrite(file_path, outputFile, 'cp932')
+            print('!!!!!!')
         except UnicodeDecodeError:
             shutil.copyfile(file_path, outputFile)
 
@@ -182,7 +183,8 @@ if __name__ == "__main__":
     frame0 = ttk.Frame(root, padding=10)
     frame0.grid(row=0, column=1, sticky=W)
     context = ttk.Label(frame0, text="本toolはテキストファイル内の文字を変換するtoolです。\n 原本フォルダ内の全てのファイルを検索して「変更後の文字」に変換し、\n保存先フォルダにコピーを保存します。"
-                                     "\n「変更前の文字」に該当されないファイルがある場合はそのままコピーされます。", anchor=W)
+                                     "\n変換は以下の拡張子に対応し、それ以外はそのままコピーされます。\n"
+                                     "html, css, js, xml, scss, py, txt, csv", anchor=W)
     context.pack(side=RIGHT)
 
 
