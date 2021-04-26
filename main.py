@@ -16,9 +16,13 @@ after_text = ''
 
 
 def readWrite(file_path, outputFile, *args):
+    global before_text
+    global after_text
     edit_list = []
-    find_starting = 'https://shuppanbunka.heteml.jp/'
-    find_ending = 'https://shuppanbunka.heteml.net/'
+    # find_starting = 'https://shuppanbunka.heteml.jp/'
+    # find_ending = 'https://shuppanbunka.heteml.net/'
+    find_starting = before_text
+    find_ending = after_text
 
     with open(file_path, 'r', encoding=args[0], errors='ignore') as f:
         fl = f.read()
@@ -38,21 +42,10 @@ def readWrite(file_path, outputFile, *args):
 
 def ChangeText(dir, filename):
     global cnt
-
-
     file_path = os.path.join(dir, filename)
-    # print('file_path:', file_path)
-    # output_path = dir.replace('inputfile', 'outputfile')
-    # outputFile = os.path.join(output_path, filename)
     outputFile = os.path.join(output, filename)
-    # outputFile = str(output) + str(filename)
 
-    # if os.path.isdir(output_path) == False:
-    #     os.makedirs(output_path)
-
-    # find_starting = 'https://shuppanbunka.heteml.jp/'
     find_starting = before_text
-    # find_ending = 'https://shuppanbunka.heteml.net/'
     find_ending = after_text
     edit_list = []
 
@@ -143,17 +136,6 @@ def conductMain():
     if text:
         messagebox.showinfo("info", text)
 
-
-
-    # if dirPath:
-    #     text += "フォルダパス：" + dirPath + "\n"
-    # if dirPath2:
-    #     text += "ファイルパス：" + dirPath2
-    #
-    # if text:
-    #     messagebox.showinfo("info", text)
-    # else:
-    #     messagebox.showerror("error", "パスの指定がありません。")
 def exit():
     sys.exit()
 if __name__ == "__main__":
@@ -213,8 +195,6 @@ if __name__ == "__main__":
     IFileEntry = ttk.Entry(frame2, textvariable=entry2, width=30)
     IFileEntry.pack(side=LEFT)
 
-
-
     # 「ファイル参照」ボタンの作成
     IFileButton = ttk.Button(frame2, text="参照", command=dirdialog_clicked2)
     IFileButton.pack(side=LEFT)
@@ -223,11 +203,8 @@ if __name__ == "__main__":
     before_moji_label.pack(side=LEFT)
 
     # 「フォルダ参照3」エントリーの作成
-    # global before_text
     entry3 = StringVar()
     IDirEntry3 = ttk.Entry(frame3, textvariable=entry3, width=45)
-    # before_text = IDirEntry3
-    # print('IDirEntry3:', IDirEntry3)
     IDirEntry3.pack(side=LEFT)
 
 
@@ -246,9 +223,6 @@ if __name__ == "__main__":
     copyright = ttk.Label(frame5, text="ver1.0 by kwansung" + "\n" + "制作日：2021.04.26")
     copyright.pack(side=LEFT)
 
-
-
-
     # Frame6の作成
     frame6 = ttk.Frame(root, padding=10)
     frame6.grid(row=7,column=1,sticky=W)
@@ -258,7 +232,6 @@ if __name__ == "__main__":
     button1.pack(fill = "x", padx=50, side = "left")
 
     # キャンセルボタンの設置
-    # button2 = ttk.Button(frame5, text=("閉じる"), command=quit)
     button2 = ttk.Button(frame6, text=("閉じる"), command=exit)
     button2.pack(fill = "x", padx=50, side = "left")
 
